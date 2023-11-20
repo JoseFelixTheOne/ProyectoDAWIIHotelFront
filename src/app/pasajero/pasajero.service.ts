@@ -25,7 +25,6 @@ export class PasajeroService {
 
   listarPasajeros(){
     this._http.get<Pasajero[]>(urlBase+"/passenger").subscribe((res) =>{
-      console.log(res)
       this._pasajeros=res;
     })
   }
@@ -35,17 +34,40 @@ export class PasajeroService {
     
   }
 
+
   listarTipoDocumento(){
-    this._http.get<TipoDocumento[]>(urlBase+"/doctype").subscribe((res) =>{
+    this._http.get<TipoDocumento[]>(urlBase+"/doctypes").subscribe((res) =>{
       console.log(res)
       this._tipodocumentos=res;
     })
      
    }
 
+   insertarPasajero(opasajero:Pasajero){
+    return this._http.post<Pasajero>(urlBase+"/passenger/",opasajero);
+   }
+
+   
+
+   
+   actualizarPasajero(opasajero:Pasajero){
+    return this._http.put<Pasajero>(urlBase+"/passenger/",opasajero);
+   }
+
+   eliminarPasajero(id:number){
+    return this._http.delete(urlBase+"/passenger/"+id);
+  }
+
   get tipodocumentos():TipoDocumento[]{
     return [...this._tipodocumentos]
   }
+
+  buscarPasajeros(nombrepasajero:string){
+    this._http.get<Pasajero[]>(urlBase+"/passenger/name/"+nombrepasajero).subscribe(res=>{
+      this._pasajeros=res;
+     }) 
+   }
+
 
 
 }

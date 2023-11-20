@@ -1,5 +1,5 @@
-<div class="p-5">
-  <table id="example" class="table table-striped" style="width: 100%">
+<div class="pt-3 pb-3">
+  <table  class="table" style="width: 100%">
     <thead>
       <tr>
         <th>Usuario</th>
@@ -31,7 +31,7 @@
               />
             </svg>
           </button>
-          <button class="btn btn-danger">
+          <button class="btn btn-danger" (click)="eliminar(usuario.iduser)">
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="16"
@@ -51,13 +51,5 @@
         </td>
       </tr>
     </tbody>
-    <tfoot>
-      <tr>
-        <th>Usuario</th>
-        <th>Persona</th>
-        <th>Tipo Usuario</th>
-        <th>Operaciones</th>
-      </tr>
-    </tfoot>
   </table>
 </div>

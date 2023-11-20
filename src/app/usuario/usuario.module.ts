@@ -5,17 +5,21 @@ import { TablaUsuarioComponent } from './tabla-usuario/tabla-usuario.component';
 import { UsuarioService } from './usuario.service';
 import { FormUsuarioComponent } from './form-usuario/form-usuario.component';
 import {FormsModule} from "@angular/forms"
+import { CustomMinDirective } from './form-usuario/custom-min.directive';
+import { MenuModule } from '../menu/menu.module';
 
 
 @NgModule({
   declarations: [
     UsuarioPrincipalComponent,
     TablaUsuarioComponent,
-    FormUsuarioComponent
+    FormUsuarioComponent,
+    CustomMinDirective
   ],
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    MenuModule
   ],
   providers:[UsuarioService]
 })

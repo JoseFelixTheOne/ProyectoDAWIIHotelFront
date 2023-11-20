@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { CargarScriptsService } from 'src/app/cargar-scripts.service';
+import { PasajeroService } from '../pasajero.service';
 
 @Component({
   selector: 'app-pasajero-principal',
@@ -7,11 +9,21 @@ import { Router } from '@angular/router';
   styleUrls: ['./pasajero-principal.component.css']
 })
 export class PasajeroPrincipalComponent {
-  
-  constructor(private router:Router){
+  nombrepasajero:string=""
+  constructor(private router:Router,private pasajeroService:PasajeroService){
 
   }
+
+
   agregar(){
     this.router.navigate(["pasajero/agregar"])
+  }
+
+  buscarPasajero(){
+    if(this.nombrepasajero==""){
+      this.pasajeroService.listarPasajeros();
+    }else{
+      this.pasajeroService.buscarPasajeros(this.nombrepasajero)
+    }
   }
 }

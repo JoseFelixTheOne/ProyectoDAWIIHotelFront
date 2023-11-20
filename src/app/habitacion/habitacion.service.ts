@@ -61,6 +61,25 @@ export class HabitacionService {
     return this._http.get<Habitacion>(urlBase+"/room/"+id);
   }
 
+  insertarHabitacion(ohabitacion:Habitacion){
+    return this._http.post<Habitacion>(urlBase+"/room/",ohabitacion);
+   }
+
+   
+   actualizarHabitacion(ohabitacion:Habitacion){
+    return this._http.put<Habitacion>(urlBase+"/room/",ohabitacion);
+   }
+
+   eliminarHabitacion(id:number){
+    return this._http.delete(urlBase+"/room/"+id);
+  }
+
+  buscarhabitacion(nombrehabitacion:string){
+    this._http.get<Habitacion[]>(urlBase+"/room/roomnumber/"+nombrehabitacion).subscribe(res=>{
+      this._habitacion=res;
+     }) 
+   }
+
   constructor(private _http:HttpClient) {
     this.listarEstadoHabitacion()
     this.listarPiso();

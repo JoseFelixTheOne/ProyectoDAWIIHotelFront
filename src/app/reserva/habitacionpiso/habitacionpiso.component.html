@@ -1,0 +1,65 @@
+<app-menu></app-menu>
+
+<div class="container mt-4">
+    <div class="row row-cols-1 row-cols-md-2 g-4">
+      <div class="col" *ngFor="let habitacion of habitaciones">
+        <div class="card bg-light my-card">
+          <div class="card-body">
+            <h5 class="card-title ms-3">Habitación N°{{habitacion.roomNumber}}</h5>
+            <ul class="list-group list-group-flush">
+              <li class="list-group-item">Precio: ${{habitacion.roomPrice}} por noche</li>
+              <li class="list-group-item">Estado: {{habitacion.objRoomStatus?.name}}</li>
+              <li class="list-group-item">Número de Piso: {{habitacion.objFloor?.desc}}</li>
+              <li class="list-group-item">Tipo de Habitación: {{habitacion.objRoomType?.desc}}</li>
+            </ul>
+            <div class="d-flex justify-content-center" style="margin-top: 1em;">
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="reservar(habitacion.roomId,habitacion.roomPrice)" class="btn btn-primary text-center">Reservar</button>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      
+    </div>
+</div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Ingrese Fechas</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form  (ngSubmit)="guardarDetalle()">
+                  <div>
+                    <label>Ingrese fecha inicio reserva</label>
+                    <input   name="fechaInicio"
+                    [(ngModel)]="detallereserva.checkin"  type="date" class="form-control" />
+                </div>
+                <div>
+                    <label>Ingrese fecha fin reserva</label>
+
+                    <input name="fechaFin" [(ngModel)]="detallereserva.checkout"  type="date" class="form-control" />
+
+                </div>
+                <div>
+                  <label>Detalle</label>
+
+                  <textarea name="nota" [(ngModel)]="detallereserva.note" class="form-control"></textarea>
+
+              </div>
+        </form>
+
+      </div>
+      <div class="modal-footer">
+        <button type="button" id="btnCerrar" class="btn btn-secondary" data-bs-dismiss="modal">Cerrar</button>
+        <button type="button" (click)="aceptar()" class="btn btn-primary">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+

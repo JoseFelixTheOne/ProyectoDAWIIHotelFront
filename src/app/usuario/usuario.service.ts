@@ -19,9 +19,28 @@ export class UsuarioService {
   })
  }
 
+ agregarUsuario(ousuario:Usuario):Observable<Usuario>{
+    return this._http.post<Usuario>(urlBase+"/user/",ousuario)
+ }
+
+ editarUsuario(ousuario:Usuario):Observable<Usuario>{
+  return this._http.put<Usuario>(urlBase+"/user/",ousuario)
+ }
+
  obtenerUsuario(id:number): Observable<Usuario>{
   return this._http.get<Usuario>(urlBase+"/user/"+id);
  }
+
+ eliminarUsuario(id:number){
+   return this._http.delete(urlBase+"/user/"+id);
+ }
+
+ buscarUsuarios(nombreusuario:string){
+  this._http.get<Usuario[]>(urlBase+"/user/username/"+nombreusuario).subscribe(res=>{
+    this._usuarios=res;
+   }) 
+ }
+
 
   constructor(private _http:HttpClient) {
     this.listarUsuarios()

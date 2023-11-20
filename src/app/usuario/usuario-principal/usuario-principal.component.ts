@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
+import { UsuarioService } from '../usuario.service';
 
 @Component({
   selector: 'app-usuario-principal',
@@ -8,11 +9,20 @@ import { Router } from '@angular/router';
 })
 export class UsuarioPrincipalComponent {
   
-  constructor(private routes:Router){
+  nombreusuario:string=""
+  constructor(private routes:Router,private usuarioService:UsuarioService){
 
   }
   
   agregar(){
     this.routes.navigate(["usuario/agregar"])
+  }
+
+  buscarUsuario(){
+    if(this.nombreusuario==""){
+      this.usuarioService.listarUsuarios();
+    }else{
+      this.usuarioService.buscarUsuarios(this.nombreusuario)
+    }
   }
 }

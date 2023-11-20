@@ -5,18 +5,24 @@ import { TablaPasajeroComponent } from './tabla-pasajero/tabla-pasajero.componen
 import { PasajeroService } from './pasajero.service';
 import { FormPasajeroComponent } from './form-pasajero/form-pasajero.component';
 import {FormsModule} from "@angular/forms"
+import { CustomMinDirective } from './form-pasajero/custom-min.directive';
+import { MenuModule } from '../menu/menu.module';
+
 
 
 @NgModule({
   declarations: [
     PasajeroPrincipalComponent,
     TablaPasajeroComponent,
-    FormPasajeroComponent
+    FormPasajeroComponent,
+    CustomMinDirective
+    
     
   ],
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    MenuModule
   ],
   providers:[
     PasajeroService

@@ -5,6 +5,7 @@ import { TablaTipousuarioComponent } from './tabla-tipousuario/tabla-tipousuario
 import { TipousuarioService } from './tipousuario.service';
 import { FormTipousuarioComponent } from './form-tipousuario/form-tipousuario.component';
 import {FormsModule} from "@angular/forms"
+import { MenuModule } from '../menu/menu.module';
 
 
 @NgModule({
@@ -15,7 +16,8 @@ import {FormsModule} from "@angular/forms"
   ],
   imports: [
     FormsModule,
-    CommonModule
+    CommonModule,
+    MenuModule
   ],
   providers:[
     TipousuarioService

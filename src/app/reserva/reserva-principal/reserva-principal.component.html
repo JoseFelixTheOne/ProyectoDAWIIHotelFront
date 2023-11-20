@@ -1,1 +1,14 @@
-<h1>Reserva Principal</h1>
+<app-menu></app-menu>
+
+<div class="container mt-5">
+    <div class="row row-cols-1 row-cols-md-3">
+      <div class="col mb-4" *ngFor="let piso of pisos"  (click)="verHabitacion(piso.idfloor)" >
+        <div class="card custom-card">
+          <div class="card-body">
+            <h5 class="card-title">{{piso.desc}}</h5>
+          </div>
+        </div>
+      </div>
+  </div>
+  
+

@@ -1,0 +1,19 @@
+    .card {
+      margin-bottom: 20px;
+    }
+
+    .card:hover {
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Efecto de sombra al hacer hover */
+        transform: translateY(-2px); /* Elevación sutil al hacer hover */
+        transition: box-shadow 0.3s ease, transform 0.3s ease; /* Transiciones suaves */
+      }
+
+      .my-card {
+        background-color: #f8d7da; /* Color de fondo rosa claro */
+        border: 1px solid #f5c6cb; /* Color de borde rojo claro */
+      }
+      
+      .my-card:hover {
+        background-color: #d4edda; /* Color de fondo verde claro al hacer hover */
+        border: 1px solid #c3e6cb; /* Color de borde verde al hacer hover */
+      }
