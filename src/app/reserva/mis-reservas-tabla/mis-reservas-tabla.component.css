@@ -1,0 +1,27 @@
+/* Estilos para la tabla de detalles */
+.table-details {
+    width: 100%; /* O ajusta el ancho según tus necesidades */
+    margin-bottom: 1rem; /* Margen inferior para separar de otras secciones */
+    color: #495057; /* Color de texto predeterminado */
+  }
+  
+  .table-details th, .table-details td {
+    padding: 0.75rem; /* Relleno interno */
+    vertical-align: top; /* Alineación vertical superior */
+    border-top: 1px solid #dee2e6; /* Borde superior */
+  }
+  
+  .table-details thead th {
+    background-color: #007bff; /* Color de fondo del encabezado */
+    color: #fff; /* Color de texto del encabezado */
+    border-color: #007bff; /* Color del borde del encabezado */
+  }
+  
+  .table-details tbody + tbody {
+    border-top: 2px solid #007bff; /* Doble borde entre filas */
+  }
+  
+  .table-details tr.selected {
+    background-color: #c3e6cb; /* Color de fondo para resaltar la fila seleccionada */
+    border: 1px solid #28a745; /* Borde verde para resaltar */
+  }

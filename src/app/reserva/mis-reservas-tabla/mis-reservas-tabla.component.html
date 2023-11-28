@@ -1,0 +1,49 @@
+<table class="table">
+    <thead>
+        <tr>
+            <th>Id Reserva</th>
+            <th>Fecha</th>
+            <th>Total</th>
+        </tr>
+    </thead>
+      <tbody>
+    <ng-container *ngFor="let reserva of reservas | paginate: { itemsPerPage: 5, currentPage: page, totalItems: totalLength }; let i = index ">
+      <tr (click)="toggleDetails(i)" style="cursor: pointer;">
+        <td>{{ reserva.reservationId }}</td>
+        <td>{{ reserva.date | date:'dd/MM/yyyy' }}</td>
+        <td>S/{{ reserva.total }}</td>
+      </tr>
+      <!-- Área oculta para detalles -->
+      <ng-container *ngIf="reservaSeleccionada === i">
+        <tr>
+          <td colspan="3">
+            <!-- Detalles aquí -->
+            <table class="table table-details">
+              <thead>
+                <tr>
+                  <th>Room ID</th>
+                  <th>Checkin</th>
+                  <th>Checkout</th>
+                  <th>Price</th>
+                  <th>Note</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr *ngFor="let detalle of reserva.details">
+                  <td>{{ detalle.roomId }}</td>
+                  <td>{{ detalle.checkin | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ detalle.checkout | date:'dd/MM/yyyy' }}</td>
+                  <td>{{ detalle.price }}</td>
+                  <td>{{ detalle.note }}</td>
+                </tr>
+              </tbody>
+            </table>
+          </td>
+        </tr>
+      </ng-container>
+    </ng-container>
+  </tbody>
+</table>
+<div class="pagination">
+    <pagination-controls (pageChange)="cambiar($event)" ></pagination-controls>
+  </div>

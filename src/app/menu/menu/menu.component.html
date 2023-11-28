@@ -2,7 +2,7 @@
     <input type="checkbox" id="nav-check">
     <div class="nav-header">
       <div class="nav-title">
-        Logo
+        Bienvenido <span class="nombrecompleto">{{nombreCompleto}}</span>  
       </div>
     </div>
     <div class="nav-btn">
@@ -12,15 +12,18 @@
         <span></span>
       </label>
     </div>
-    
     <ul class="nav-list mt-2 mb-2">
-      <li routerLink="/login" ><a >Login</a></li>
-      <li routerLink="/pasajero" ><a >Pasajero</a></li>
+      <!--<li routerLink="/login" ><a >Login</a></li>-->
+      <li *ngFor="let menu of menus" [routerLink]="menu.menuUrl" >
+        <a >{{menu.menuName}}</a>
+      </li>
+      <!--  <li routerLink="/pasajero" ><a >Pasajero</a></li>
       <li routerLink="/usuario"><a >Usuario</a></li>
-      <li routerLink="/tipousuario"><a >Tipo Usuario</a></li>
+      <li routerLink="/tipousuario"><a >Tipo Usuario</a></li> 
       <li routerLink="/habitacion" ><a >Habitacion</a></li>
       <li routerLink="/reserva"><a >Reserva</a></li>
       <li routerLink="/detallereserva"><a >Detalle Reserva</a></li>
-
+      <li routerLink="/misreserva"><a >Mis Reservas</a></li>-->
+      <li (click)="cerrarSesion()"><a >Cerrar Sesion</a></li>
     </ul>
   </nav>

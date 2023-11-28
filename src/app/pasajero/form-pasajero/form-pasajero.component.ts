@@ -95,7 +95,9 @@ export class FormPasajeroComponent {
               this.router.navigate(["pasajero"]) 
               this.pasajeroService.listarPasajeros();
             }
-          })
+          },(err)=>{
+            Swal.fire('Ocurrio un error', err.error, 'error');
+         })
         }else{
           this.pasajeroService.actualizarPasajero(this.pasajero).subscribe(res=>{
             if(res.idpas>0){
@@ -103,7 +105,9 @@ export class FormPasajeroComponent {
               this.router.navigate(["pasajero"]) 
               this.pasajeroService.listarPasajeros();
             }
-          })
+          },(err)=>{
+            Swal.fire('Ocurrio un error', err.error, 'error');
+         })
         }
 
       }

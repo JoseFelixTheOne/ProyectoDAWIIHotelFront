@@ -1,4 +1,4 @@
-<div class="pt-3 pb-3">
+<div class="pt-3 pb-3 container">
   <table  class="table" style="width: 100%">
     <thead>
       <tr>
@@ -9,7 +9,7 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor="let usuario of usuarios">
+      <tr *ngFor="let usuario of usuarios |paginate:{itemsPerPage:5,currentPage:page,totalItems:totalLength}">
         <td>{{ usuario.user }}</td>
         <td>{{ usuario.objPassenger?.names+' '+usuario.objPassenger?.lastname1+' '+usuario.objPassenger?.lastname2 }}</td>
         <td>{{ usuario.objuserType?.name }}</td>
@@ -52,4 +52,7 @@
       </tr>
     </tbody>
   </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="cambiar($event)" ></pagination-controls>
+  </div>
 </div>

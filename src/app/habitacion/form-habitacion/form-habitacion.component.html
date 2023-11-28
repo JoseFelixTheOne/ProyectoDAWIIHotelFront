@@ -1,118 +1,121 @@
 <app-menu></app-menu>
-<h2 class="text-center text-dark">{{ titulo }}</h2>
-<form
-  (ngSubmit)="guardar()"
-  #form_habitacion="ngForm"
-  class="form-control needs-validation"
->
-  <div class="mb-1">
-    <label>N° Habitación</label>
-    <input
-      type="text"
-      name="roomNumber"
-      [(ngModel)]="habitacion.roomNumber"
-      class="form-control"
-      required
-      minlength="1"
-      maxlength="6"
-      pattern="^[1-9]\d{0,6}$"
-      [class.is-invalid]="nroHabitacionInvalido()"
-    />
-    <div class="invalid-feedback" *ngIf="nroHabitacionInvalido()">
-      Nro habitacion no valida
+<div class="container">
+  <h2 class="text-center text-dark">{{ titulo }}</h2>
+  <form
+    (ngSubmit)="guardar()"
+    #form_habitacion="ngForm"
+    class="form-control needs-validation"
+  >
+    <div class="mb-1">
+      <label>N° Habitación</label>
+      <input
+        type="text"
+        name="roomNumber"
+        [(ngModel)]="habitacion.roomNumber"
+        class="form-control"
+        required
+        minlength="1"
+        maxlength="6"
+        pattern="^[1-9]\d{0,6}$"
+        [class.is-invalid]="nroHabitacionInvalido()"
+      />
+      <div class="invalid-feedback" *ngIf="nroHabitacionInvalido()">
+        Nro habitacion no valida
+      </div>
     </div>
-  </div>
-  <div>
-    <label>Precio</label>
-    <input
-      type="text"
-      [(ngModel)]="habitacion.roomPrice"
-      name="roomPrice"
-      class="form-control"
-      required
-      minlength="2"
-      maxlength="9"
-      pattern="^[0-9]+(\.[0-9]{1,2})?$"
-      [class.is-invalid]="precioInvalido()"
-    />
-    <div class="invalid-feedback" *ngIf="precioInvalido()">precio invalido</div>
-  </div>
-  <div>
-    <label>Estado Habitación</label>
-    <select
-      [(ngModel)]="habitacion.roomStatusId"
-      class="form-control"
-      name="roomStatusId"
-      customMin
-      [minimo]="0"
-      [class.is-invalid]="EstadoHabitacionInvalido()"
-    >
-      <option value="0">--Seleccione--</option>
-      <option
-        *ngFor="let estadohabitacion of estadohabitaciones"
-        [value]="estadohabitacion.idestroom"
+    <div>
+      <label>Precio</label>
+      <input
+        type="text"
+        [(ngModel)]="habitacion.roomPrice"
+        name="roomPrice"
+        class="form-control"
+        required
+        minlength="2"
+        maxlength="9"
+        pattern="^[0-9]+(\.[0-9]{1,2})?$"
+        [class.is-invalid]="precioInvalido()"
+      />
+      <div class="invalid-feedback" *ngIf="precioInvalido()">precio invalido</div>
+    </div>
+    <div>
+      <label>Estado Habitación</label>
+      <select
+        [(ngModel)]="habitacion.roomStatusId"
+        class="form-control"
+        name="roomStatusId"
+        customMin
+        [minimo]="0"
+        [class.is-invalid]="EstadoHabitacionInvalido()"
       >
-        {{ estadohabitacion.name }}
-      </option>
-    </select>
-    <span class="invalid-feedback" *ngIf="EstadoHabitacionInvalido()"
-      >Debe seleccionar una opcion</span
-    >
-  </div>
-
-  <div>
-    <label>Piso</label>
-    <select
-      [(ngModel)]="habitacion.floorId"
-      class="form-control"
-      name="floorId"
-      customMin
-      [minimo]="0"
-      [class.is-invalid]="nroPisoInvalido()"
-    >
-      <option value="0">--Seleccione--</option>
-      <option *ngFor="let piso of pisos" [value]="piso.idfloor">
-        {{ piso.desc }}
-      </option>
-    </select>
-    <span class="invalid-feedback" *ngIf="nroPisoInvalido()"
-      >Debe seleccionar una opcion</span
-    >
-  </div>
-
-  <div>
-    <label>Tipo Habitación</label>
-    <select
-      [(ngModel)]="habitacion.roomTypeId"
-      class="form-control"
-      name="roomTypeId"
-      customMin
-      [minimo]="0"
-      [class.is-invalid]="tipoHabitacionInvalido()"
-    >
-      <option value="0">--Seleccione--</option>
-      <option
-        *ngFor="let tipohabitacion of tipohabitaciones"
-        [value]="tipohabitacion.idroomtype"
+        <option value="0">--Seleccione--</option>
+        <option
+          *ngFor="let estadohabitacion of estadohabitaciones"
+          [value]="estadohabitacion.idestroom"
+        >
+          {{ estadohabitacion.name }}
+        </option>
+      </select>
+      <span class="invalid-feedback" *ngIf="EstadoHabitacionInvalido()"
+        >Debe seleccionar una opcion</span
       >
-        {{ tipohabitacion.name }}
-      </option>
-    </select>
-    <span class="invalid-feedback" *ngIf="tipoHabitacionInvalido()"
-      >Debe seleccionar una opcion</span
-    >
-  </div>
-
-  <div class="mt-2 mb-2">
-    <button
-      type="submit"
-      class="btn btn-success m-1"
-      [disabled]="form_habitacion.invalid"
-    >
-      Guardar
-    </button>
-    <button type="button" class="btn btn-danger" (click)="regresar()">
-      Regresar
-    </button>
-  </div>
-</form>
+    </div>
+  
+    <div>
+      <label>Piso</label>
+      <select
+        [(ngModel)]="habitacion.floorId"
+        class="form-control"
+        name="floorId"
+        customMin
+        [minimo]="0"
+        [class.is-invalid]="nroPisoInvalido()"
+      >
+        <option value="0">--Seleccione--</option>
+        <option *ngFor="let piso of pisos" [value]="piso.idfloor">
+          {{ piso.desc }}
+        </option>
+      </select>
+      <span class="invalid-feedback" *ngIf="nroPisoInvalido()"
+        >Debe seleccionar una opcion</span
+      >
+    </div>
+  
+    <div>
+      <label>Tipo Habitación</label>
+      <select
+        [(ngModel)]="habitacion.roomTypeId"
+        class="form-control"
+        name="roomTypeId"
+        customMin
+        [minimo]="0"
+        [class.is-invalid]="tipoHabitacionInvalido()"
+      >
+        <option value="0">--Seleccione--</option>
+        <option
+          *ngFor="let tipohabitacion of tipohabitaciones"
+          [value]="tipohabitacion.idroomtype"
+        >
+          {{ tipohabitacion.name }}
+        </option>
+      </select>
+      <span class="invalid-feedback" *ngIf="tipoHabitacionInvalido()"
+        >Debe seleccionar una opcion</span
+      >
+    </div>
+  
+    <div class="mt-2 mb-2">
+      <button
+        type="submit"
+        class="btn btn-success m-1"
+        [disabled]="form_habitacion.invalid"
+      >
+        Guardar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="regresar()">
+        Regresar
+      </button>
+    </div>
+  </form>
+  
+</div>

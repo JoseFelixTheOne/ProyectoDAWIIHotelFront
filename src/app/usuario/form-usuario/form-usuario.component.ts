@@ -6,6 +6,9 @@ import { Usuario } from '../interface/Usuario';
 import { UsuarioService } from '../usuario.service';
 import { NgForm } from '@angular/forms';
 import Swal from 'sweetalert2';
+import { Pasajero } from 'src/app/pasajero/interfaces/Pasajero';
+import Correo from 'src/app/reserva/interfaces/Correo';
+import { ReservaService } from 'src/app/reserva/reserva.service';
 
 @Component({
   selector: 'app-form-usuario',
@@ -39,8 +42,11 @@ tipoNombreInvalido(): boolean {
 tipoUsuarioInvalido(): boolean {
   return this.formUser?.controls['usertpe'].value === 0;
 }
+
+pasajeros:Pasajero[]=[]
+
   constructor(private tipousuarioService:TipousuarioService,private pasajeroService:PasajeroService,private routes:Router ,private activateRoute:ActivatedRoute,
-    private usuarioService:UsuarioService){
+    private usuarioService:UsuarioService,private reservaService:ReservaService){
       var param=this.activateRoute.snapshot.params["id"]
       if(param==undefined) this.titulo="Nuevo Usuario"
       else 
@@ -50,14 +56,17 @@ tipoUsuarioInvalido(): boolean {
           this.usuario= res;
         })
       }
+      this.listarPersonasSinusuario();
   }
 
   get tipousuarios(){
     return this.tipousuarioService.tipousuarios
   }
 
-  get pasajeros(){
-    return this.pasajeroService.pasajeros
+  listarPersonasSinusuario(){
+    return this.usuarioService.listarPersonasSinUsuarios().subscribe(res=>{
+      this.pasajeros=res
+    })
   }
   
   regresar(){
@@ -84,7 +93,38 @@ tipoUsuarioInvalido(): boolean {
               Swal.fire('Exito!', 'Se  guardó los cambios correctamente', 'success');
               this.routes.navigate(["usuario"])
               this.usuarioService.listarUsuarios();
+              var objpass=this.pasajeros.filter(p=>p.idpas==this.usuario.idpassenger)[0];
+              /////
+              console.log(objpass)
+              const datosParaEnviar:Correo = {
+                correosAEnviar: [objpass.email],
+                asunto: 'Bienvenido a Hotel Premier',
+                contenido: `
+
+                ¡Bienvenido/a al Sistema de Reservas de Hotel Premier, ${objpass.names+ ' '+objpass.lastname1+' '+objpass.lastname2 }! ,le queremos informar
+                que se acaba de crearle un usuario que es ${this.usuario.user}
+
+                Estamos emocionados de tenerte como parte de nuestro equipo de gestión. Aquí es donde puedes administrar las reservas del hotel de manera eficiente. Esperamos que encuentres todas las herramientas y funciones que necesitas para asegurar una experiencia de reserva fluida para nuestros huéspedes.
+
+                Si tienes alguna pregunta o necesitas orientación sobre el uso del sistema, nuestro equipo de soporte está disponible para ayudarte.
+
+                ¡Gracias por tu dedicación para hacer que las estancias en Hotel Premier sean inolvidables! ¡Que tengas un día productivo!
+
+                `, 
+              };
+               this.reservaService.enviarCorreo(datosParaEnviar).subscribe(res=>{
+                  console.error('Se envio el correo');
+                },               
+                error => {
+                  console.error('Error en la solicitud:', error);
+                }
+              )
+
+              /////
+
             }
+          },(err)=>{
+             Swal.fire('Ocurrio un error', err.error, 'error');
           })
         }else{
           this.usuarioService.editarUsuario(this.usuario).subscribe(res=>{
@@ -93,12 +133,11 @@ tipoUsuarioInvalido(): boolean {
               this.routes.navigate(["usuario"])
               this.usuarioService.listarUsuarios();
             }
-          })
+          },(err)=>{
+            Swal.fire('Ocurrio un error', err.error, 'error');
+         })
         }
-
       }
     });
-
-  
   }
 }

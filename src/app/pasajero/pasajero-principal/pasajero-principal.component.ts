@@ -8,22 +8,37 @@ import { PasajeroService } from '../pasajero.service';
   templateUrl: './pasajero-principal.component.html',
   styleUrls: ['./pasajero-principal.component.css']
 })
-export class PasajeroPrincipalComponent {
+export class PasajeroPrincipalComponent{
   nombrepasajero:string=""
-  constructor(private router:Router,private pasajeroService:PasajeroService){
 
+  ngOnInit(): void {
+   
   }
 
+  constructor(private router:Router,private pasajeroService:PasajeroService){
+    this.nombrepasajero=this.pasajeroService.nombrepasajero
+  }
 
+  limpiar(){
+    this.pasajeroService.nombrepasajero=""
+    this.nombrepasajero=""
+    this.pasajeroService.listarPasajeros()
+  }
+
+  onKeyUp(event: any): void {
+    const valorTipeado = event.target.value;
+    this.pasajeroService.nombrepasajero=valorTipeado;
+  }
   agregar(){
     this.router.navigate(["pasajero/agregar"])
   }
 
   buscarPasajero(){
-    if(this.nombrepasajero==""){
+    this.pasajeroService.page=1;
+    if(this.pasajeroService.nombrepasajero==""){
       this.pasajeroService.listarPasajeros();
     }else{
-      this.pasajeroService.buscarPasajeros(this.nombrepasajero)
+      this.pasajeroService.buscarPasajeros(this.pasajeroService.nombrepasajero)
     }
   }
 }

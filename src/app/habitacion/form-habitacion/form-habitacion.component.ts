@@ -99,7 +99,9 @@ tipoHabitacionInvalido(): boolean {
                  this.routes.navigate(["habitacion"])
                  this.habitacionService.listarHabitacion();
               }
-          })
+          },(err)=>{
+            Swal.fire('Ocurrio un error', err.error, 'error');
+         })
     
         }else{
     
@@ -109,7 +111,9 @@ tipoHabitacionInvalido(): boolean {
                  this.routes.navigate(["habitacion"])
                  this.habitacionService.listarHabitacion();
               }
-          })
+          },(err)=>{
+            Swal.fire('Ocurrio un error', err.error, 'error');
+         })
     
         }
 

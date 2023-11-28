@@ -12,7 +12,6 @@ import Swal from 'sweetalert2';
 })
 export class TablaUsuarioComponent {
 
-
   get usuarios(){
     return [...this.usuarioService.usuarios]
   }
@@ -20,6 +19,18 @@ export class TablaUsuarioComponent {
     //_CargarScripts.Carga(["datatable"]);
 
   }
+  get page(){
+    return this.usuarioService.page;
+  }
+
+  get totalLength(){
+    return this.usuarioService.totalLength;
+  }
+
+  cambiar(event:any){
+    this.usuarioService.page=event;
+  }
+
   editar(id:number){
     this.routes.navigate(["usuario/editar/"+id])
   }

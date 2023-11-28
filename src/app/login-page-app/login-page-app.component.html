@@ -1,0 +1,58 @@
+<section class="vh-80 gradient-custom">
+  <div class="container py-4 h-500">
+    <div class="row d-flex justify-content-center align-items-center h-50">
+      <div class="col-12 col-md-8 col-lg-6 col-xl-5">
+        <div
+          class="card bg-light text-dark"
+          style="border-radius: 1rem; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)"
+        >
+          <div class="card-body p-5 text-center">
+            <div class="mb-2">
+              <img
+                src="assets/img/hotelPremier.png"
+                alt="Logo de Hotel Premier"
+                class="mb-4"
+                style="max-width: 200px"
+              />
+             
+              <p class="text-dark-50 mb-4">
+                ¡Bienvenido! Por favor, ingrese sus credenciales.
+              </p>
+              <div class="form-floating mb-3">
+                <input
+                  [(ngModel)]="oLogin.user"
+                  type="email"
+                  id="floatingInput"
+                  class="form-control"
+                  placeholder=""
+                />
+                <label for="floatingInput">Usuario</label>
+              </div>
+
+              <div class="form-floating form-white mb-3">
+                <input
+                  [(ngModel)]="oLogin.password"
+                  type="password"
+                  class="form-control"
+                  id="floatingPassword"
+                  placeholder=""
+                />
+                <label for="floatingPassword">Contraseña</label>
+              </div>
+
+              <button
+                (click)="enviar()"
+                class="btn btn-primary btn-lg px-5"
+                type="submit"
+              >
+                Ingresar
+              </button>
+
+              <a style="cursor: pointer;" class="text-center d-block mt-3" (click)="nuevo()" >Nuevo Usuario</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,21 @@
+<app-menu></app-menu>
+<div class="container mt-5">
+    <form (ngSubmit)="buscar()"> 
+        <div class="row d-flex justify-content-center align-items-end">
+            <div class="col-md-5">
+                <label>Fecha Inicio</label>
+                <input type="date" class="form-control" name="fechaInicio" [(ngModel)]="orango.startDate" />
+            </div>
+            <div class="col-md-5">
+                <label>Fecha Fin</label>
+                <input type="date" class="form-control" name="fechaFin" [(ngModel)]="orango.endDate" />
+            </div>
+            <div  class="col-md-2">
+                <button type="submit" class="btn btn-outline-primary">Buscar</button>&nbsp;
+            </div>
+        </div>
+      
+      
+    </form>
+    <app-mis-reservas-tabla></app-mis-reservas-tabla>
+</div>

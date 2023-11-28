@@ -1,17 +1,21 @@
 <app-menu></app-menu>
-<div class="d-flex justify-content-center">
-    <button class="btn btn-success m-2" (click)="agregar()">
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
-          </svg>
-    </button>
+<div class="container">
+    <div class="d-flex justify-content-center">
+        <button class="btn btn-success m-2" (click)="agregar()">
+            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus-lg" viewBox="0 0 16 16">
+                <path fill-rule="evenodd" d="M8 2a.5.5 0 0 1 .5.5v5h5a.5.5 0 0 1 0 1h-5v5a.5.5 0 0 1-1 0v-5h-5a.5.5 0 0 1 0-1h5v-5A.5.5 0 0 1 8 2Z"/>
+              </svg>
+        </button>
+    </div>
+    <form (ngSubmit)="buscarUsuario()"  >
+        <div class="input-group mb-3 mt-3">
+            <input type="text" class="form-control"
+            (keyup)="cambiar($event)"
+            [(ngModel)]="nombreusuario"  name="nombreusuario"
+            placeholder="Ingrese nombre usuario" aria-label="Nombre Usuario" aria-describedby="button-addon2">
+            <button class="btn btn-outline-primary" type="submit" id="button-addon2">Buscar</button>
+            <button class="btn btn-outline-dark" (click)="limpiar()" type="button" id="button-addon2">Limpiar</button>
+         </div>
+    </form>
+    <app-tabla-usuario></app-tabla-usuario>
 </div>
-<form (ngSubmit)="buscarUsuario()"  >
-    <div class="input-group mb-3 mt-3">
-        <input type="text" class="form-control"
-        [(ngModel)]="nombreusuario"  name="nombreusuario"
-        placeholder="Ingrese nombre usuario" aria-label="Nombre Usuario" aria-describedby="button-addon2">
-        <button class="btn btn-outline-dark" type="submit" id="button-addon2">Buscar</button>
-     </div>
-</form>
-<app-tabla-usuario></app-tabla-usuario>

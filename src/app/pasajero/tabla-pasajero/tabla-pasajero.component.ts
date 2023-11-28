@@ -11,11 +11,26 @@ import Swal from 'sweetalert2';
 })
 export class TablaPasajeroComponent {
 
+  get page(){
+    return this.pasajeroService.page;
+  }
+
+  get totalLength(){
+    return this.pasajeroService.totalLength;
+
+  }
+
   get pasajeros(){
     return [...this.pasajeroService.pasajeros]
   }
   constructor(private pasajeroService:PasajeroService,private routes:Router,private _CargarScripts:CargarScriptsService){
   }
+
+  cambiar(event:any){
+    this.pasajeroService.page=event
+  }
+
+  
   editar(idpasajero:number){
     this.routes.navigate(["pasajero/editar/"+idpasajero])
   }

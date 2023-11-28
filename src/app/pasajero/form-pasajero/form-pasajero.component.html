@@ -1,146 +1,150 @@
 <app-menu></app-menu>
-<h2 class="text-center text-dark">{{ titulo }}</h2>
-<form
-  (ngSubmit)="guardar()"
-  #formpasajero="ngForm"
-  class="form-control needs-validation"
-  autocomplete="off"
-  novalidate
->
-  <!--se podria validar de mas formas las expresiones regulares con pattern-->
-  <div class="mb-1">
-    <label>Nombre</label>
-    <input
-      [(ngModel)]="pasajero.names"
-      type="text"
-      name="names"
-      class="form-control"
-      required
-      minlength="3"
-      maxlength="50"
-      pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
-      [class.is-invalid]="nombreValido()"
-    />
+<div class="container">
 
-    <div class="invalid-feedback" *ngIf="nombreValido()">
-      Debe ser de al menos 3 letras.
+  <h2 class="text-center text-dark">{{ titulo }}</h2>
+  <form
+    (ngSubmit)="guardar()"
+    #formpasajero="ngForm"
+    class="form-control needs-validation"
+    autocomplete="off"
+    novalidate
+  >
+    <!--se podria validar de mas formas las expresiones regulares con pattern-->
+    <div class="mb-1">
+      <label>Nombre</label>
+      <input
+        [(ngModel)]="pasajero.names"
+        type="text"
+        name="names"
+        class="form-control"
+        required
+        minlength="3"
+        maxlength="50"
+        pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
+        [class.is-invalid]="nombreValido()"
+      />
+  
+      <div class="invalid-feedback" *ngIf="nombreValido()">
+        Debe ser de al menos 3 letras.
+      </div>
     </div>
-  </div>
-  <div>
-    <label>Apellido Paterno</label>
-    <input
-      type="text"
-      [(ngModel)]="pasajero.lastname1"
-      name="lastname1"
-      class="form-control"
-      required
-      minlength="3"
-      maxlength="50"
-      pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
-      [class.is-invalid]="apellidoPatValido()"
-    />
-    <span class="invalid-feedback" *ngIf="apellidoPatValido()"
-      >Debe de ser de 3 letras al menos</span
-    >
-  </div>
-  <div>
-    <label>Apellido Materno</label>
-    <input
-      type="text"
-      [(ngModel)]="pasajero.lastname2"
-      name="lastname2"
-      class="form-control"
-      required
-      minlength="3"
-      maxlength="50"
-      pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
-      [class.is-invalid]="apellidMatValido()"
-    />
-    <span class="invalid-feedback" *ngIf="apellidMatValido()">Debe de ser de 3 letras al menos</span>
-  </div>
-  <div>
-    <label>Tipo Documento</label>
-    <select
-      name="idtpodoc"
-      ngModel
-      customMin
-      [minimo]="0"
-      class="form-control"
-      [(ngModel)]="pasajero.idtpodoc"
-      [class.is-invalid]="tipoDocumentoInvalido()"
-    >
-      <option value="0">--Seleccione--</option>
-      <option
-        *ngFor="let tipodocumento of tipodocumentos"
-        [value]="tipodocumento.idTypeDoc"
+    <div>
+      <label>Apellido Paterno</label>
+      <input
+        type="text"
+        [(ngModel)]="pasajero.lastname1"
+        name="lastname1"
+        class="form-control"
+        required
+        minlength="3"
+        maxlength="50"
+        pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
+        [class.is-invalid]="apellidoPatValido()"
+      />
+      <span class="invalid-feedback" *ngIf="apellidoPatValido()"
+        >Debe de ser de 3 letras al menos</span
       >
-        {{ tipodocumento.desc }}
-      </option>
-    </select>
-    <span class="invalid-feedback" *ngIf="tipoDocumentoInvalido()"
-      >Debe seleccionar una opcion</span
-    >
-  </div>
-  <div>
-    <label>Numero Documento</label>
-    <input
-      [(ngModel)]="pasajero.nrodoc"
-      type="text"
-      class="form-control"
-      name="nrodoc"
-      required
-      minlength="8"
-      maxlength="8"
-      pattern="^[0-9]+$"
-      [class.is-invalid]="DocumentoInvalido()"
-    />
-    <span class="invalid-feedback" *ngIf="DocumentoInvalido()"
-      >Documento no valido</span
-    >
-  </div>
-  <div>
-    <label>Correo</label>
-    <input
-      [(ngModel)]="pasajero.email"
-      type="text"
-      class="form-control"
-      name="email"
-      required
-      pattern="^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
-      [class.is-invalid]="EmailInvalido()"
-    />
-    <span class="invalid-feedback" *ngIf="EmailInvalido()">
-      Correo no valido
-    </span>
-  </div>
-  <div>
-    <label>Teléfono</label>
-    <input
-      [(ngModel)]="pasajero.phone"
-      type="text"
-      class="form-control"
-      name="phone"
-      required
-      maxlength="9"
-      pattern="^[0-9]{9}$"
-      [class.is-invalid]="PhoneInvalido()"
-    />
-    <span class="invalid-feedback" *ngIf="PhoneInvalido()">
-      Teléfono no valido
-    </span>
-  </div>
-
-  <div class="mt-2 mb-2">
-    <button
-      type="submit"
-      class="btn btn-success m-1"
-      [disabled]="formpasajero.invalid"
-    >
-      Guardar
-    </button>
-
-    <button type="button" class="btn btn-danger" (click)="regresar()">
-      Regresar
-    </button>
-  </div>
-</form>
+    </div>
+    <div>
+      <label>Apellido Materno</label>
+      <input
+        type="text"
+        [(ngModel)]="pasajero.lastname2"
+        name="lastname2"
+        class="form-control"
+        required
+        minlength="3"
+        maxlength="50"
+        pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
+        [class.is-invalid]="apellidMatValido()"
+      />
+      <span class="invalid-feedback" *ngIf="apellidMatValido()">Debe de ser de 3 letras al menos</span>
+    </div>
+    <div>
+      <label>Tipo Documento</label>
+      <select
+        name="idtpodoc"
+        ngModel
+        customMin
+        [minimo]="0"
+        class="form-control"
+        [(ngModel)]="pasajero.idtpodoc"
+        [class.is-invalid]="tipoDocumentoInvalido()"
+      >
+        <option value="0">--Seleccione--</option>
+        <option
+          *ngFor="let tipodocumento of tipodocumentos"
+          [value]="tipodocumento.idTypeDoc"
+        >
+          {{ tipodocumento.desc }}
+        </option>
+      </select>
+      <span class="invalid-feedback" *ngIf="tipoDocumentoInvalido()"
+        >Debe seleccionar una opcion</span
+      >
+    </div>
+    <div>
+      <label>Numero Documento</label>
+      <input
+        [(ngModel)]="pasajero.nrodoc"
+        type="text"
+        class="form-control"
+        name="nrodoc"
+        required
+        minlength="8"
+        maxlength="8"
+        pattern="^[0-9]+$"
+        [class.is-invalid]="DocumentoInvalido()"
+      />
+      <span class="invalid-feedback" *ngIf="DocumentoInvalido()"
+        >Documento no valido</span
+      >
+    </div>
+    <div>
+      <label>Correo</label>
+      <input
+        [(ngModel)]="pasajero.email"
+        type="text"
+        class="form-control"
+        name="email"
+        required
+        pattern="^[a-zA-Z0-9.+_-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+        [class.is-invalid]="EmailInvalido()"
+      />
+      <span class="invalid-feedback" *ngIf="EmailInvalido()">
+        Correo no valido
+      </span>
+    </div>
+    <div>
+      <label>Teléfono</label>
+      <input
+        [(ngModel)]="pasajero.phone"
+        type="text"
+        class="form-control"
+        name="phone"
+        required
+        maxlength="9"
+        pattern="^[0-9]{9}$"
+        [class.is-invalid]="PhoneInvalido()"
+      />
+      <span class="invalid-feedback" *ngIf="PhoneInvalido()">
+        Teléfono no valido
+      </span>
+    </div>
+  
+    <div class="mt-2 mb-2">
+      <button
+        type="submit"
+        class="btn btn-success m-1"
+        [disabled]="formpasajero.invalid"
+      >
+        Guardar
+      </button>
+  
+      <button type="button" class="btn btn-danger" (click)="regresar()">
+        Regresar
+      </button>
+    </div>
+  </form>
+  
+</div>

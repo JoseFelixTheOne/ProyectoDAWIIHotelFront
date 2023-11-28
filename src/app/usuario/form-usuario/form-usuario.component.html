@@ -1,98 +1,100 @@
 <app-menu></app-menu>
-<h2 class="text-center text-dark">{{ titulo }}</h2>
-<form (ngSubmit)="guardar()" #formUser="ngForm">
-  <div class="mb-1" *ngIf="usuario.iduser == 0">
-    <label>Nombre Persona</label>
-    <select
-      name="idpassenger"
-      [(ngModel)]="usuario.idpassenger"
-      class="form-control"
-      ngModel
-      customMin
-      [minimo]="0"
-      [class.is-invalid]="tipoNombreInvalido()"
-    >
-      <option value="0">--Seleccione--</option>
-      <option *ngFor="let pasajero of pasajeros" [value]="pasajero.idpas">
-        {{
-          pasajero.names + " " + pasajero.lastname1 + " " + pasajero.lastname2
-        }}
-      </option>
-    </select>
-    <span class="invalid-feedback" *ngIf="tipoNombreInvalido()"
-      >Debe seleccionar una opcion</span
-    >
-  </div>
-  <div>
-    <label>Nombre Usuario</label>
-    <input
-      name="user"
-      [(ngModel)]="usuario.user"
-      type="text"
-      class="form-control"
-      required
-      minlength="3"
-      maxlength="50"
-      pattern="[a-zA-Zñ\u00F1\u00E1\u00E9\u00ED\u00F3\u00FA\u00FC\u00F4\u00F6\u00F8\u00F9 ]+"
-      [class.is-invalid]="usuarioNombreInvalido()"
-    />
-    <div class="invalid-feedback" *ngIf="usuarioNombreInvalido()">
-      Debe ser de al menos 3 letras.
-    </div>
-  </div>
-
-  <div *ngIf="usuario.iduser == 0">
-    <label>Contraseña</label>
-    <input
-      name="password"
-      [(ngModel)]="usuario.password"
-      type="password"
-      class="form-control"
-      required
-      minlength="6"
-      maxlength="25"
-      pattern="^[a-zA-Z0-9,\-\_\@\.]+$"
-      [class.is-invalid]="contraseniaInvalido()"
-    />
-    <div class="invalid-feedback" *ngIf="contraseniaInvalido()">
-      Debe ser de al menos 6 caracteres alfanumericos.
-    </div>
-  </div>
-
-  <div>
-    <label>Tipo Usuario</label>
-    <select
-      name="usertpe"
-      [(ngModel)]="usuario.usertpe"
-      class="form-control"
-      ngModel
-      customMin
-      [minimo]="0"
-      [class.is-invalid]="tipoUsuarioInvalido()"
-    >
-      <option value="0">--Seleccione--</option>
-      <option
-        *ngFor="let tipousuario of tipousuarios"
-        [value]="tipousuario.userTypeId"
+<div class="container">
+  <h2 class="text-center text-dark">{{ titulo }}</h2>
+  <form (ngSubmit)="guardar()" #formUser="ngForm">
+    <div class="mb-1" *ngIf="usuario.iduser == 0">
+      <label>Nombre Persona</label>
+      <select
+        name="idpassenger"
+        [(ngModel)]="usuario.idpassenger"
+        class="form-control"
+        ngModel
+        customMin
+        [minimo]="0"
+        [class.is-invalid]="tipoNombreInvalido()"
       >
-        {{ tipousuario.name }}
-      </option>
-    </select>
-    <span class="invalid-feedback" *ngIf="tipoUsuarioInvalido()"
-      >Debe seleccionar una opcion</span
-    >
-  </div>
-
-  <div class="mt-2 mb-2">
-    <button
-      type="submit"
-      class="btn btn-success m-1"
-      [disabled]="formUser.invalid"
-    >
-      Guardar
-    </button>
-    <button type="button" class="btn btn-danger" (click)="regresar()">
-      Regresar
-    </button>
-  </div>
-</form>
+        <option value="0">--Seleccione--</option>
+        <option *ngFor="let pasajero of pasajeros" [value]="pasajero.idpas">
+          {{
+            pasajero.names + " " + pasajero.lastname1 + " " + pasajero.lastname2
+          }}
+        </option>
+      </select>
+      <span class="invalid-feedback" *ngIf="tipoNombreInvalido()"
+        >Debe seleccionar una opcion</span
+      >
+    </div>
+    <div>
+      <label>Nombre Usuario</label>
+      <input
+        name="user"
+        [(ngModel)]="usuario.user"
+        type="text"
+        class="form-control"
+        required
+        minlength="3"
+        maxlength="50"
+        [class.is-invalid]="usuarioNombreInvalido()"
+      />
+      <div class="invalid-feedback" *ngIf="usuarioNombreInvalido()">
+        Debe ser de al menos 3 letras.
+      </div>
+    </div>
+  
+    <div *ngIf="usuario.iduser == 0">
+      <label>Contraseña</label>
+      <input
+        name="password"
+        [(ngModel)]="usuario.password"
+        type="password"
+        class="form-control"
+        required
+        minlength="6"
+        maxlength="25"
+        pattern="^[a-zA-Z0-9,\-\_\@\.]+$"
+        [class.is-invalid]="contraseniaInvalido()"
+      />
+      <div class="invalid-feedback" *ngIf="contraseniaInvalido()">
+        Debe ser de al menos 6 caracteres alfanumericos.
+      </div>
+    </div>
+  
+    <div>
+      <label>Tipo Usuario</label>
+      <select
+        name="usertpe"
+        [(ngModel)]="usuario.usertpe"
+        class="form-control"
+        ngModel
+        customMin
+        [minimo]="0"
+        [class.is-invalid]="tipoUsuarioInvalido()"
+      >
+        <option value="0">--Seleccione--</option>
+        <option
+          *ngFor="let tipousuario of tipousuarios"
+          [value]="tipousuario.userTypeId"
+        >
+          {{ tipousuario.name }}
+        </option>
+      </select>
+      <span class="invalid-feedback" *ngIf="tipoUsuarioInvalido()"
+        >Debe seleccionar una opcion</span
+      >
+    </div>
+  
+    <div class="mt-2 mb-2">
+      <button
+        type="submit"
+        class="btn btn-success m-1"
+        [disabled]="formUser.invalid"
+      >
+        Guardar
+      </button>
+      <button type="button" class="btn btn-danger" (click)="regresar()">
+        Regresar
+      </button>
+    </div>
+  </form>
+  
+</div>

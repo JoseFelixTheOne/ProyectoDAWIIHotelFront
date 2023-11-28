@@ -12,7 +12,7 @@ export class HabitacionPrincipalComponent  {
 
   numerohabitacion:string=""
   constructor(private routes:Router,private habitacionService:HabitacionService){
-
+    this.numerohabitacion=this.habitacionService.numerohabitacion
   }
 
 
@@ -20,7 +20,17 @@ export class HabitacionPrincipalComponent  {
     this.routes.navigate(["habitacion/agregar"])
   }
 
+  limpiar(){
+    this.habitacionService.numerohabitacion=""
+    this.numerohabitacion=""
+  }
+
+  cambiar(event:any){
+    this.habitacionService.numerohabitacion=event.target.value
+  }
+
   buscarHabitacion(){
+    this.habitacionService.page=1
     if(this.numerohabitacion==""){
       this.habitacionService.listarHabitacion();
     }else{

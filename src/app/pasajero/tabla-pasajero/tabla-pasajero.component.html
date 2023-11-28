@@ -1,4 +1,4 @@
-<div class="pt-3 pb-3">
+<div class="pt-3 pb-3 container">
   <table  class="table" style="width: 100%">
     <thead>
       <tr>
@@ -12,7 +12,7 @@
     </thead>
     <tbody>
         
-        <tr *ngFor="let pasajero of pasajeros">
+        <tr *ngFor="let pasajero of pasajeros |paginate:{itemsPerPage:5,currentPage:page,totalItems:totalLength}">
             <td>{{pasajero.names+' '+pasajero.lastname1+' '+pasajero.lastname2}}</td>
             <td>{{pasajero.docType?.desc}}</td>
             <td>{{pasajero.nrodoc}}</td>
@@ -36,6 +36,9 @@
      
     </tbody>
   </table>
+  <div class="pagination">
+    <pagination-controls (pageChange)="cambiar($event)" ></pagination-controls>
+  </div>
 </div>
 
 <!--

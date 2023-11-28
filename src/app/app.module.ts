@@ -10,8 +10,6 @@ import { PasajeroModule } from './pasajero/pasajero.module';
 import { ReservaModule } from './reserva/reserva.module';
 import { TipousuarioModule } from './tipousuario/tipousuario.module';
 import { UsuarioModule } from './usuario/usuario.module';
-import { LoginPrincipalComponent } from './login/login-principal/login-principal.component';
-import { LoginModule } from './login/login.module';
 import { TablaHabitacionComponent } from './habitacion/tabla-habitacion/tabla-habitacion.component';
 import { HabitacionPrincipalComponent } from './habitacion/habitacion-principal/habitacion-principal.component';
 import { HabitacionModule } from './habitacion/habitacion.module';
@@ -19,24 +17,29 @@ import {HttpClientModule} from "@angular/common/http"
 import { MenuModule } from './menu/menu.module';
 import { MenuComponent } from './menu/menu/menu.component';
 import { DetallereservaPrincipalComponent } from './detallereserva/detallereserva-principal/detallereserva-principal.component';
+import { LoginPageAppComponent } from './login-page-app/login-page-app.component';
+import { FormsModule } from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginPrincipalComponent,
-    DetallereservaPrincipalComponent
+    DetallereservaPrincipalComponent,
+    LoginPageAppComponent
     ],
   imports: [
     HttpClientModule,
+    FormsModule,
     BrowserModule,
     AppRoutingModule,
     PasajeroModule,
     ReservaModule,
     TipousuarioModule,
     UsuarioModule,
-    LoginModule,
     HabitacionModule,
-    MenuModule
+    MenuModule,
+    NgxPaginationModule
+
   ],
   providers: [
     CargarScriptsService

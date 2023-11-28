@@ -11,7 +11,6 @@ import { CargarScriptsService } from 'src/app/cargar-scripts.service';
   styleUrls: ['./tabla-habitacion.component.css']
 })
 export class TablaHabitacionComponent   {
-
   get habitaciones():Habitacion[]{
     return this.habitacionServices.habitaciones;
   }
@@ -19,10 +18,23 @@ export class TablaHabitacionComponent   {
   constructor(private habitacionServices:HabitacionService,private routes:Router){
    
   }
+
+  get page(){
+    return this.habitacionServices.page
+  }
+
+  get totalLength(){
+    return this.habitacionServices.totalLength
+  }
  
 
   editar(id:number){
     this.routes.navigate(["habitacion/editar/"+id])
+  }
+
+
+  cambiar(event:any){
+    this.habitacionServices.page=event;
   }
 
   eliminar(id:number){

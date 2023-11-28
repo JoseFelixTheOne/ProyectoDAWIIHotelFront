@@ -16,6 +16,12 @@ export class HabitacionService {
   private _tipohabitaciones:TipoHabitacion[]=[]
   private _habitacion: Habitacion[]=[]
 
+
+  numerohabitacion:string=""
+  totalLength:any;
+  page:number=1;
+
+
   get habitaciones():Habitacion[] {
     return [...this._habitacion];
   }

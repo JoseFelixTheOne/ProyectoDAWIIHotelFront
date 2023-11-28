@@ -13,7 +13,7 @@
               <li class="list-group-item">Tipo de Habitación: {{habitacion.objRoomType?.desc}}</li>
             </ul>
             <div class="d-flex justify-content-center" style="margin-top: 1em;">
-              <button data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="reservar(habitacion.roomId,habitacion.roomPrice)" class="btn btn-primary text-center">Reservar</button>
+              <button data-bs-toggle="modal" data-bs-target="#exampleModal" (click)="reservar(habitacion.roomId,habitacion.roomPrice,habitacion.roomNumber)" class="btn btn-primary text-center">Reservar</button>
             </div>
           </div>
         </div>

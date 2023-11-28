@@ -16,8 +16,18 @@ export class DetallereservaService {
     return [...this._detalleReserva]
   }
 
+  limpiarDetalle(){
+    this._detalleReserva=[]
+  }
+
   agregarDetalle(detalle:DetalleReserva){
+    if(this._detalleReserva.length==0)  detalle.detailId=1;
+    else detalle.detailId= this._detalleReserva[this._detalleReserva.length-1].detailId+1
     this._detalleReserva.push(detalle)
+  }
+
+  eliminarDetalle(iddetalle:number){
+    this._detalleReserva= this._detalleReserva.filter(p=>p.detailId!=iddetalle)
   }
 
 }

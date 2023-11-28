@@ -18,13 +18,16 @@ export class PasajeroService {
   private _tipodocumentos:TipoDocumento[]=[]
   private _pasajeros:Pasajero[]=[]
   private _pasajero?:Pasajero;
+  nombrepasajero:string=""
+  totalLength:any;
+  page:number=1;
 
   get pasajeros():Pasajero[]{
     return [...this._pasajeros]
   }
 
   listarPasajeros(){
-    this._http.get<Pasajero[]>(urlBase+"/passenger").subscribe((res) =>{
+    return this._http.get<Pasajero[]>(urlBase+"/passenger").subscribe((res) =>{
       this._pasajeros=res;
     })
   }
